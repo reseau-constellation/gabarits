@@ -144,8 +144,8 @@ enregistrerRecherche({
           a.résultatObjectif.score > b.résultatObjectif.score
             ? -1
             : a.résultatObjectif.score < b.résultatObjectif.score
-            ? 1
-            : 0,
+              ? 1
+              : 0,
         )),
     }),
   fRechercheDéfaut: async ({
@@ -162,8 +162,8 @@ enregistrerRecherche({
           a.résultatObjectif.score > b.résultatObjectif.score
             ? -1
             : a.résultatObjectif.score < b.résultatObjectif.score
-            ? 1
-            : 0,
+              ? 1
+              : 0,
         )),
     }),
 });

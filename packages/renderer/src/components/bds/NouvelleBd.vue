@@ -266,8 +266,8 @@ const retour = () => {
         cheminement.value === 'bd'
           ? 'gabaritBd'
           : cheminement.value === 'nuée'
-          ? 'gabaritNuée'
-          : 'motsClefs',
+            ? 'gabaritNuée'
+            : 'motsClefs',
       );
       break;
 

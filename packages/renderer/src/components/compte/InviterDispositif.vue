@@ -6,7 +6,7 @@
         v-bind="{props: propsActivateur}"
       />
     </template>
-    <v-card 
+    <v-card
       class="mx-auto"
       :max-width="mdAndUp ? 500 : 300"
     >
@@ -26,35 +26,47 @@
         </v-card-subtitle>
       </v-card-item>
       <v-card-text>
-        <v-window 
-          v-model="étape" 
+        <v-window
+          v-model="étape"
           style="overflow-y: scroll"
         >
           <v-window-item :value="0">
             <v-list>
               <v-list-item
                 :title="t('dispositifs.inviter.manuellement')"
-                :append-icon="isRtl ? 'mdi-chevron-left': 'mdi-chevron-right'"
+                :append-icon="isRtl ? 'mdi-chevron-left' : 'mdi-chevron-right'"
                 prepend-icon="mdi-pencil"
                 @click="() => suivreCheminementManuel()"
               ></v-list-item>
               <v-list-item
                 :title="t('dispositifs.inviter.codeR2')"
-                :append-icon="isRtl ? 'mdi-chevron-left': 'mdi-chevron-right'"
+                :append-icon="isRtl ? 'mdi-chevron-left' : 'mdi-chevron-right'"
                 prepend-icon="mdi-qrcode"
                 @click="() => suivreCheminementCodeR2()"
               ></v-list-item>
             </v-list>
           </v-window-item>
-          <v-window-item :value="1" class="text-center">
-            <div class="mx-auto"
-            style="display: flex; justify-content: center;align-items: center;
-            border-radius: 15px;
-              border: 2px solid #1867c0;
-              width: 250px;
-              height: 50px; "
+          <v-window-item
+            :value="1"
+            class="text-center"
+          >
+            <div
+              class="mx-auto"
+              style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 15px;
+                border: 2px solid #1867c0;
+                width: 250px;
+                height: 50px;
+              "
             >
-              <p class="text-h3" style="color: #1867c0;">{{ (invitation?.codeSecret || '---').slice(2, 9) }}</p>
+              <p
+                class="text-h3"
+                style="color: #1867c0"
+                >{{ (invitation?.codeSecret || '---').slice(2, 9) }}</p
+              >
             </div>
             <v-btn
               v-if="!invitationTexte"
@@ -74,16 +86,25 @@
               @click="() => révoquerInvitation()"
             />
           </v-window-item>
-          <v-window-item :value="2" class="text-center">
-            <div class="mx-auto mb-2" style="display: flex; align-items: center; justify-content: center;">
+          <v-window-item
+            :value="2"
+            class="text-center"
+          >
+            <div
+              class="mx-auto mb-2"
+              style="display: flex; align-items: center; justify-content: center"
+            >
               <qrcode-vue
                 :value="invitationTexte"
                 :size="200"
                 level="H"
               />
-              <div :class="{
-                fond: !invitationTexte
-              }" style="position: fixed; height: 200px; width: 200px;" />
+              <div
+                :class="{
+                  fond: !invitationTexte,
+                }"
+                style="position: fixed; height: 200px; width: 200px"
+              />
             </div>
             <v-btn
               v-if="!invitationTexte"
@@ -124,7 +145,6 @@
         >
           {{ t('communs.suivant') }}
         </v-btn>
-        
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -136,8 +156,8 @@ import {computed, inject, ref} from 'vue';
 
 import QrcodeVue from 'qrcode.vue';
 import {கிளிமூக்கை_உபயோகி} from '/@/plugins/kilimukku/kilimukku-vue';
-import { useDisplay, useRtl } from 'vuetify/lib/framework.mjs';
-import { watchEffect } from 'vue';
+import {useDisplay, useRtl} from 'vuetify/lib/framework.mjs';
+import {watchEffect} from 'vue';
 
 const constl = inject<client.ClientConstellation>('constl');
 
@@ -150,11 +170,11 @@ const {isRtl} = useRtl();
 const dialogue = ref(false);
 
 // Pour la sécurité, automatiquement révoquer l'invitation si l'on ferme le dialogue
-watchEffect(async ()=>{
+watchEffect(async () => {
   if (!dialogue.value) {
     await révoquerInvitation();
   }
-})
+});
 
 const étape = ref(0);
 const listeÉtapes = ['cheminement', 'manuelle', 'codeR2'] as const;
@@ -261,10 +281,10 @@ const invitationTexte = computed(() => {
 const révoquerInvitation = async () => {
   invitation.value = undefined;
   // await constl.révoquerInvitation()
-}
+};
 </script>
 <style scoped>
 .fond {
-  background-color: rgba(255,255,255,0.95);
+  background-color: rgba(255, 255, 255, 0.95);
 }
 </style>

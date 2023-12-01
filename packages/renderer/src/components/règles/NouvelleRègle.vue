@@ -297,8 +297,8 @@ const retour = () => {
         cheminement.value === 'existe'
           ? 'TypeRègle'
           : cheminement.value === 'borne'
-          ? 'BorneFixeOuDynamique'
-          : 'CatégorieFixeOuDynamique',
+            ? 'BorneFixeOuDynamique'
+            : 'CatégorieFixeOuDynamique',
       );
       break;
 
@@ -324,8 +324,8 @@ const suivantActif = computed<{actif: boolean; visible: boolean}>(() => {
           !!(typeBornes.value === 'fixe'
             ? valBorneFixe.value
             : typeBornes.value === 'dynamiqueColonne'
-            ? valBorneDynamiqueColonne.value
-            : valBorneDynamiqueVariable.value),
+              ? valBorneDynamiqueColonne.value
+              : valBorneDynamiqueVariable.value),
         visible: true,
       };
     case 'ValeurCatégorie':

@@ -30,7 +30,9 @@ watchEffect(async () => {
       <v-card-title>
         {{ t('accueil.nœud.titre') }}Nœud WS local
         <v-tooltip
-          :text="t('accueil.nœud.indice: Ouvrir un nœud local pour connecter d\'autres applications.')"
+          :text="
+            t('accueil.nœud.indice: Ouvrir un nœud local pour connecter d\'autres applications.')
+          "
           location="bottom"
         >
           <template #activator="{props}">

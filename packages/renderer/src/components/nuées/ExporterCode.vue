@@ -72,12 +72,11 @@ import type {client} from '@constl/ipa';
 import type {bds} from '@constl/ipa';
 import DialogueLicence from '/@/components/licences/DialogueLicence.vue';
 import {utiliserLangues} from '/@/plugins/localisation/localisation';
-import { GABARIT_CODE } from '/@/consts';
+import {GABARIT_CODE} from '/@/consts';
 
 import axios from 'axios';
 import JSZip from 'jszip';
-import { fileSave } from 'browser-fs-access';
-
+import {fileSave} from 'browser-fs-access';
 
 const constl = inject<client.ClientConstellation>('constl');
 
@@ -305,8 +304,8 @@ const générerPaquetComplet = async ({
 }): Promise<void> => {
   // Télécharger gabarit correspondant de GitHub
   const urlGabarit = électron ? GABARIT_CODE.électron : GABARIT_CODE.internet;
-  const zipGabarit = (await axios.get(urlGabarit, { responseType: 'arraybuffer'})).data;
-  
+  const zipGabarit = (await axios.get(urlGabarit, {responseType: 'arraybuffer'})).data;
+
   // Générer les fichiers spécifiques à la nuée
   const codeSpécificationNuée;
   const codeComposanteAjoutDonnées;
@@ -314,21 +313,30 @@ const générerPaquetComplet = async ({
   // Décomprimer le gabarit zip et ajouter les fichiers générés
   const gabarit = await JSZip.loadAsync(zipGabarit);
 
-  const adresseDossierUtils = électron ? ['packages', 'renderer', 'src', 'utils'] : ['src', 'utils'];
-  const dossierGabaritUtils = adresseDossierUtils.reduce((cumul: JSZip | null, nouveau: string) => cumul ? cumul.folder(nouveau): null, gabarit);
+  const adresseDossierUtils = électron
+    ? ['packages', 'renderer', 'src', 'utils']
+    : ['src', 'utils'];
+  const dossierGabaritUtils = adresseDossierUtils.reduce(
+    (cumul: JSZip | null, nouveau: string) => (cumul ? cumul.folder(nouveau) : null),
+    gabarit,
+  );
   if (!dossierGabaritUtils) throw new Error('Erreur de structure de paquet.');
 
   dossierGabaritUtils.file('nuée.ts', codeSpécificationNuée);
-  
-  const adresseDossierComposantes = électron ? ['packages', 'renderer', 'src', 'components'] : ['src', 'components'];
-  const dossierGabaritComposantes = adresseDossierComposantes.reduce((cumul: JSZip | null, nouveau: string) => cumul ? cumul.folder(nouveau): null, gabarit);
+
+  const adresseDossierComposantes = électron
+    ? ['packages', 'renderer', 'src', 'components']
+    : ['src', 'components'];
+  const dossierGabaritComposantes = adresseDossierComposantes.reduce(
+    (cumul: JSZip | null, nouveau: string) => (cumul ? cumul.folder(nouveau) : null),
+    gabarit,
+  );
   if (!dossierGabaritComposantes) throw new Error('Erreur de structure de paquet.');
-  
+
   dossierGabaritComposantes.file('AjoutDonnées.vue', codeComposanteAjoutDonnées);
 
   // Rezipper tout et télécharger
-  const contenu = await gabarit.generateAsync({ type: 'blob' });
-  await fileSave(contenu, { fileName: nomFichier });
+  const contenu = await gabarit.generateAsync({type: 'blob'});
+  await fileSave(contenu, {fileName: nomFichier});
 };
-
 </script>
