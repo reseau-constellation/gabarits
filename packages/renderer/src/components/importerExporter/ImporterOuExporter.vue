@@ -201,8 +201,8 @@ const retour = () => {
         cheminementAjouterAutomatisation.value
           ? 'dispositif'
           : cheminement.value === 'importation'
-          ? 'correspondancesImportation'
-          : 'formatDocExportation',
+            ? 'correspondancesImportation'
+            : 'formatDocExportation',
       );
       break;
 

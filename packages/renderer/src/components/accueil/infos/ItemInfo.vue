@@ -6,7 +6,7 @@
     <v-btn
       icon="mdi-close"
       variant="flat"
-      @click="()=>émettre('fermer')"
+      @click="() => émettre('fermer')"
     />
   </item-info-telecharger>
   <item-info-mettre-a-jour
@@ -16,7 +16,7 @@
     <v-btn
       icon="mdi-close"
       variant="flat"
-      @click="()=>émettre('fermer')"
+      @click="() => émettre('fermer')"
     />
   </item-info-mettre-a-jour>
 </template>
@@ -26,11 +26,10 @@ import ItemInfoTelecharger from './ItemInfoTélécharger.vue';
 import ItemInfoMettreAJour from './ItemInfoMettreÀJour.vue';
 
 defineProps<{
-    info: InfoAvecId
+  info: InfoAvecId;
 }>();
 
 const émettre = defineEmits<{
-    (é: 'fermer'): void;
+  (é: 'fermer'): void;
 }>();
-
 </script>

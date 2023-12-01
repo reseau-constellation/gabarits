@@ -1,5 +1,5 @@
 // ⇩ Remplacer la variable ci-dessous par le nom de votre dépôt GitHub sous format "nom_utilisatrice/nom_dépôt"
-export const DÉPÔT_GITHUB = 'reseau-constellation/gabarits'
+export const DÉPÔT_GITHUB = 'reseau-constellation/gabarits';
 
 // Touche pas
 export const URL_SIGNALEMENTS = `https://github.com/${DÉPÔT_GITHUB}/issues`;
